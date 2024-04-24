@@ -10,8 +10,20 @@ After running the command above Docker will install all necessary packages and a
 
 `Application starts with the environment: local`
 
+**Note: If you can't deploy it locally, then it's possible to check it out online here:**
+
+http://gt-app-3312f3761c9e.herokuapp.com
+
+
+## API documentation
+
+API documentation generated in Postman. It contains Environment (Heroku), tutorials, code and responses examples. Import all collections to your Postman and run the requests in a specified order to test the functionality of API.
+
+https://documenter.getpostman.com/view/8520996/2sA3BrZAWG
+
+
 ## Tests
-To test manually, you can use an already automatically created user:
+The system automatically creates a user for manually tests, there's the credentials:
 
 ```
 login: user@global-tickets.com
