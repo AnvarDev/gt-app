@@ -1,6 +1,6 @@
 ## Deploy Instructions
 
-To run the application download [Docker](https://www.docker.com). For the locally deploy was used version 26.0.2 and all the configuration is already done and is in the **docker-compose.yml**. To deploy the application, clone the repository and in the directory **gt-app** run the command:
+To run the application download [Docker](https://www.docker.com). For the locally deploy was used the version **26.0.2** and all the configuration is already done and is in the **docker-compose.yml**. To deploy the application, clone the repository and in the directory **gt-app** run the command:
 
 ```
 docker compose up
