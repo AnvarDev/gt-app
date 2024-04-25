@@ -24,7 +24,6 @@ services:
     volumes:
       - ./:/var/www/app-service
     environment:
-      APP_ENV: local
       APP_NAME: URL Shortener
       APP_DEBUG: "true"
       APP_KEY: base64:3m9S3/scMcPOeXQVHDk+K/fh9rJ86sL3BKC/jzf4K0o=

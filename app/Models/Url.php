@@ -34,12 +34,20 @@ class Url extends Model
     }
 
     /**
+     * Get the user model.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
      * Generating short url address
      *
      * @return string
      */
     public function getShortUrlAttribute()
     {
-        return route('redirect', [$this->attributes['hash_id']]);
+        return route('url.redirect', [$this->attributes['hash_id']]);
     }
 }

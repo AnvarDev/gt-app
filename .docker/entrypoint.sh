@@ -1,6 +1,6 @@
 #!/bin/bash
 
-environment=${APP_ENV:-production}
+environment=${APP_ENV:-local}
 
 printf "<<<<< Versions >>>>>\n"
 

@@ -48,6 +48,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the urls model.
+     */
+    public function urls()
+    {
+        return $this->hasMany(Url::class);
+    }
+
+    /**
      * Get the user's name.
      */
     protected function Name(): Attribute
