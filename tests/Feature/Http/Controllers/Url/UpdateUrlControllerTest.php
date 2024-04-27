@@ -34,6 +34,26 @@ class UpdateUrlControllerTest extends TestCase
     }
 
     /**
+     * Attempt to update someone else's url record
+     */
+    public function testAttemptToUpdateWebRequest(): void
+    {
+        $user = User::factory()->create();
+        $url = Url::factory()->create();
+
+        $this->actingAs($user)
+            ->post(route('url.update', ['id' => $url->getKey()]), [
+                'url' => fake()->url(),
+            ])->assertNotFound();
+
+        $this->assertDatabaseHas(Url::class, [
+            'id' => $url->getKey(),
+            'user_id' => $url->user->getKey(),
+            'url' => $url->url,
+        ]);
+    }
+
+    /**
      * Updating url result is succeed and exists in the database
      */
     public function testUpdateUrlIsSucceed(): void
@@ -65,6 +85,26 @@ class UpdateUrlControllerTest extends TestCase
             ->patchJson(route('api.url.update', ['id' => fake()->randomDigitNotNull()]))
             ->assertStatus(422)
             ->assertJsonValidationErrors(['url']);
+    }
+
+    /**
+     * Check API data of updating someone else's url record
+     */
+    public function testAttemptToUpdateApiData(): void
+    {
+        $user = User::factory()->create();
+        $url = Url::factory()->create();
+
+        $this->actingAs($user)
+            ->patchJson(route('api.url.update', ['id' => $url->getKey()]), [
+                'url' => fake()->url(),
+            ])->assertNotFound();
+
+        $this->assertDatabaseHas(Url::class, [
+            'id' => $url->getKey(),
+            'user_id' => $url->user->getKey(),
+            'url' => $url->url,
+        ]);
     }
 
     /**

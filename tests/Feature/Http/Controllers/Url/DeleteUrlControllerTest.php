@@ -24,6 +24,23 @@ class DeleteUrlControllerTest extends TestCase
     }
 
     /**
+     * Attempt to delete someone else's url record
+     */
+    public function testAttemptToDeleteWebRequest(): void
+    {
+        $user = User::factory()->create();
+        $url = Url::factory()->create();
+
+        $this->actingAs($user)
+            ->post(route('url.delete', ['id' => $url->getKey()]))
+            ->assertNotFound();
+
+        $this->assertDatabaseHas(Url::class, [
+            'id' => $url->getKey(),
+        ]);
+    }
+
+    /**
      * Deleting url result is succeed and missed in the database
      */
     public function testDeleteUrlIsSucceed(): void
@@ -38,6 +55,23 @@ class DeleteUrlControllerTest extends TestCase
             ->assertStatus(302);
 
         $this->assertDatabaseMissing(Url::class, [
+            'id' => $url->getKey(),
+        ]);
+    }
+
+    /**
+     * Check API data of deleting someone else's url record
+     */
+    public function testAttemptToDeleteApiData(): void
+    {
+        $user = User::factory()->create();
+        $url = Url::factory()->create();
+
+        $this->actingAs($user)
+            ->deleteJson(route('api.url.delete', ['id' => $url->getKey()]))
+            ->assertNotFound();
+
+        $this->assertDatabaseHas(Url::class, [
             'id' => $url->getKey(),
         ]);
     }

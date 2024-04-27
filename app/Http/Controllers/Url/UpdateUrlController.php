@@ -20,7 +20,7 @@ class UpdateUrlController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Update the url shortener record
      *
      * @param UpdateUrlRequest $request
      * @param int $id

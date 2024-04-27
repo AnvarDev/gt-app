@@ -19,7 +19,7 @@ class DeleteUrlController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Delete the url shortener record
      *
      * @param UpdateUrlRequest $request
      * @param int $id

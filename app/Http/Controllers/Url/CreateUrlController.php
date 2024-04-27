@@ -20,7 +20,7 @@ class CreateUrlController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Create a new url shortener record
      *
      * @param CreateUrlRequest $request
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\App\Http\Resources\UrlResource
