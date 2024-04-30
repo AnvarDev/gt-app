@@ -27,6 +27,8 @@ services:
       APP_NAME: URL Shortener
       APP_DEBUG: "true"
       APP_KEY: base64:3m9S3/scMcPOeXQVHDk+K/fh9rJ86sL3BKC/jzf4K0o=
+      APP_URL: http://localhost
+      SESSION_DOMAIN: localhost
       DB_HOST: database
       DB_PORT: 3306
       DB_CONNECTION: mysql
