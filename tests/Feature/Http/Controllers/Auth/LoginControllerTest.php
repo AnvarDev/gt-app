@@ -3,6 +3,7 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
@@ -67,6 +68,28 @@ class LoginControllerTest extends TestCase
         ])
             ->assertJsonValidationErrors(['email'])
             ->assertStatus(422);
+    }
+
+    /**
+     * Login form request with the expired CSRF token
+     */
+    public function testLoginCsrfTokenMismatch(): void
+    {
+        $password = fake()->password(8);
+        $user = User::factory()->create([
+            'password' => $password
+        ]);
+
+        $this->partialMock(ValidateCsrfToken::class, function ($mock) {
+            $mock->shouldAllowMockingProtectedMethods();
+            $mock->shouldReceive('getExcludedPaths')->once()->andReturn([]);
+            $mock->shouldReceive('runningUnitTests')->once()->andReturnFalse();
+        });
+
+        $this->post(route('login'), [
+            'email' => $user->email,
+            'password' => $password,
+        ])->assertStatus(419);
     }
 
     /**
